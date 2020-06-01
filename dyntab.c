@@ -3,6 +3,11 @@
 #include <string.h>
 
 Dyntab dtcreate(int size, int len, int cap) {
+	// Objects cannot have negative or null size
+	if (size <= 0) {
+		return NULL;
+	}
+
 	Dyntab tab = NULL;
 	tab = malloc(sizeof(Sdyntab));
 	
@@ -11,8 +16,9 @@ Dyntab dtcreate(int size, int len, int cap) {
 		return NULL;
 	}
 
-	tab->len = len;
 	tab->size = size;
+	tab->len = len > 0 ? len : 0; // If len <= 0, then len = 0
+	tab->cap = cap > 0 ? cap : 0; // Iden as len
 
 	// If len > cap, then cap = len
 	if (len > cap) {
@@ -68,4 +74,13 @@ int dtappend(Dyntab tab, void* element) {
 void dtdel(Dyntab tab) {
 	free(tab->data);
 	free(tab);
+}
+
+void* dtget(Dyntab tab, int index) {
+	/*
+		1: cast tab->data as char* to make byte precise pointer arithmetic
+		2: add index * sizeof elements
+		3: cast it back as void* for the return type
+	*/
+	return (void*)((char*)tab->data + index * tab->size);
 }

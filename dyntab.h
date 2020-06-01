@@ -29,4 +29,7 @@ int dtappend(Dyntab tab, void* element);
 // Free all the space that the dyntab uses
 void dtdel(Dyntab tab);
 
+// Return the address of a specific item of the data array, or NULL if it doesn't exists
+void* dtget(Dyntab tab, int index);
+
 #endif

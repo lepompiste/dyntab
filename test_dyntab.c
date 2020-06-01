@@ -39,6 +39,11 @@ int main(void) {
 		printf("t[%d] = %d\n", i, ((int*)t->data)[i]);
 	}
 
+	int* getvar = dtget(t, 7);
+	int* getVar2 = dtget(t, 8);
+
+	printf("%d %d", *getvar, *getVar2);
+
 	dtdel(t);
 
 	return 0;
