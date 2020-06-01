@@ -39,5 +39,7 @@ int main(void) {
 		printf("t[%d] = %d\n", i, ((int*)t->data)[i]);
 	}
 
+	dtdel(t);
+
 	return 0;
 }

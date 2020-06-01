@@ -18,5 +18,6 @@ typedef struct lp_dyntab Sdyntab;
 // allocates the memory, and initialize the dyntab struct
 Dyntab dtcreate(int size, int len, int cap);
 int dtappend(Dyntab tab, void* element);
+void dtdel(Dyntab tab);
 
 #endif

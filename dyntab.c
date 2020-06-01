@@ -67,3 +67,8 @@ int dtappend(Dyntab tab, void* element) {
 
 	return 0;
 }
+
+void dtdel(Dyntab tab) {
+	free(tab->data);
+	free(tab);
+}
