@@ -2,12 +2,6 @@
 #include <stdlib.h>
 #include <string.h>
 
-/**
- * allocate all the memory and initialize it correctly.
- * size = the size of elements of the tab
- * len = the initial number of elements of the tab, will be initialized with 0 value
- * cap = capacity of the tab = size preallocated in memory for append, to avoid a realloc syscall each time a call to append is made
- */
 Dyntab dtcreate(int size, int len, int cap) {
 	Dyntab tab = NULL;
 	tab = malloc(sizeof(Sdyntab));
@@ -62,6 +56,9 @@ int dtappend(Dyntab tab, void* element) {
 		tab->cap *= 2;
 	}
 
+	// copy the data
+	// a cast to char* is necessary as void* cannot deal with pointer arithmetic. As char* equals a byte, we can move at the precise byte
+	// of the data array, which is : addr of data + len * size (number of bytes of each element)
 	memcpy(((char*)tab->data) + tab->len * tab->size, element, tab->size);
 	tab->len++;
 
