@@ -7,4 +7,3 @@ int dtappend(Dyntab tab, void* element);
 void dtdel(Dyntab tab);
 void* dtget(Dyntab tab, int index);
 ```
-
