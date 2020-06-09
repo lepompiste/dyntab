@@ -42,7 +42,13 @@ int main(void) {
 	int* getvar = dtget(t, 7);
 	int* getVar2 = dtget(t, 8);
 
-	printf("%d %d", *getvar, *getVar2);
+	printf("%d %d\n", *getvar, *getVar2);
+
+	Dyntab s = dtslice(t, 2, 5);
+
+	for (int i = 0; i < s->cap; i++) {
+		printf("s[%d] = %d\n", i, ((int*)s->data)[i]);
+	}
 
 	dtdel(t);
 

@@ -71,6 +71,28 @@ int dtappend(Dyntab tab, void* element) {
 	return 0;
 }
 
+Dyntab dtslice(Dyntab tab, int a, int b) {
+	if (a < 0 || b >= tab->len || a > b) {
+		return NULL;
+	}
+
+	Dyntab slice = NULL;
+	slice = malloc(sizeof(Sdyntab));
+	
+	// If malloc fail for structure alloc, stoping execution and returning NULL
+	if (slice == NULL) {
+		return NULL;
+	}
+
+	slice->cap = tab->cap - a;
+	slice->len = b - a;
+	slice->size = tab->size;
+
+	slice->data = (void*)((char*)tab->data + a * slice->size);
+
+	return slice;
+}
+
 void dtdel(Dyntab tab) {
 	free(tab->data);
 	free(tab);
@@ -82,5 +104,9 @@ void* dtget(Dyntab tab, int index) {
 		2: add index * sizeof elements
 		3: cast it back as void* for the return type
 	*/
+	if (index < 0 || index >= tab->len) {
+		return NULL;
+	}
+
 	return (void*)((char*)tab->data + index * tab->size);
 }

@@ -26,6 +26,15 @@ Dyntab dtcreate(int size, int len, int cap);
 // Append an element at the end of the dyntab, increasing the capcity if necessary
 int dtappend(Dyntab tab, void* element);
 
+// Return a sub tab called slice between a and b - 1
+//Dyntab dtslice(Dyntab tab, int a, int b);
+/*	Slices can't be implemented for following reasons :
+ * 		When a call to dtappend is made on a slice, the original dyntab capacity won't be updated.
+ * 		Calls to free would be very tricky
+ * 
+ *	dtslice stay on the source code for documentation purpose only
+ */
+
 // Free all the space that the dyntab uses
 void dtdel(Dyntab tab);
 
